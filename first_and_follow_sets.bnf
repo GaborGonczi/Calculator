@@ -1,0 +1,4 @@
+FIRST(factor)={MINUS,NUMBER}
+FIRST(term)=FIRST(factor)={MINUS,NUMBER}
+FIRST(expr)=FIRST(term)=FIRST(factor)={MINUS,NUMBER}
+FIRST(s)=FIRST(expr)=FIRST(term)=FIRST(factor)={MINUS,NUMBER}

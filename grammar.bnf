@@ -1,0 +1,44 @@
+# tokens
+NUMBER = REGEXP('^(0|[1-9][0-9]*)$')
+PLUS = '+'
+MINUS = '-'
+MULTIPLY = '*'
+DIVIDE = '/'
+EOL = '$'
+
+# Normal 
+
+s ::= expr EOL
+
+expr ::= term PLUS term 
+         |term MINUS term
+         |term
+
+term ::= factor MULTIPLY factor
+         |factor DIVIDE factor
+         |factor
+factor ::= NUMBER
+           |MINUS NUMBER
+
+# Eliminate left recursion
+
+s ::= expr EOL
+
+expr ::= term term_comma
+
+term ::= factor factor_comma
+
+term_comma ::= PLUS term
+               |MINUS term
+               |e
+
+factor ::= NUMBER
+           |MINUS NUMBER
+
+factor_comma ::= MULTIPLY factor
+                 |DIVIDE factor
+                 |e
+
+# Eliminate left factorization
+
+# Most nem kell mert nincs két szabály ami azonos terminálissal kezdődne
