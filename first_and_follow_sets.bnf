@@ -1,4 +1,15 @@
+FIRST(factor_comma)={MULTIPLY, DIVIDE, e}
 FIRST(factor)={MINUS,NUMBER}
+FIRST(term_comma)={PLUS, MINUS, e}
 FIRST(term)=FIRST(factor)={MINUS,NUMBER}
 FIRST(expr)=FIRST(term)=FIRST(factor)={MINUS,NUMBER}
 FIRST(s)=FIRST(expr)=FIRST(term)=FIRST(factor)={MINUS,NUMBER}
+
+
+
+FOLLOW(s)={EOL}
+FOLLOW(expr)={EOL}
+FOLLOW(term)=FIRST(term_comma)\e U FOLLOW(expr)={PLUS, MINUS,EOL}
+FOLLOW(term_comma)=FOLLOW(expr)={EOL}
+FOLLOW(factor)=FIRST(factor_comma)/e U FOLLOW(term)={MULTIPLY, DIVIDE,PLUS, MINUS,EOL}
+FOLLOW(factor_comma)=FOLLOW(term)={PLUS, MINUS,EOL}
