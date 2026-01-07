@@ -1,8 +1,8 @@
-|              | NUMBER | PLUS | MINUS | MULTIPLY | DIVIDE | EOL |
-| ------------ | ------ | ---- | ----- | -------- | ------ | --- |
-| s            |        |      |       |          |        |     |
-| expr         |        |      |       |          |        |     |
-| term         |        |      |       |          |        |     |
-| term_comma   |        |      |       |          |        |     |
-| factor       |        |      |       |          |        |     |
-| factor_comma |        |      |       |          |        |     |
+| Column 1     | NUMBER                    | PLUS                  | MINUS                     | MULTIPLY                      | DIVIDE                       | EOL             |
+| ------------ | ------------------------- | --------------------- | ------------------------- | ----------------------------- | ---------------------------- | --------------- |
+| s            | s->expr EOL               |                       | s->expr EOL               |                               |                              | term_comma->e   |
+| expr         | expr->term term_comma     |                       | expr->term term_comma     |                               |                              |                 |
+| term         | term->factor factor_comma |                       | term->factor factor_comma |                               |                              |                 |
+| term_comma   |                           | term_comma->PLUS term | term_comma->MINUS term    |                               |                              |                 |
+| factor       | factor->NUMBER            |                       | factor->MINUS NUMBER      |                               |                              |                 |
+| factor_comma |                           | factor_comma->e       | factor_comma->e           | factor_comma->MULTIPLY factor | factor_comma->DIVIDE  factor | factor_comma->e |
